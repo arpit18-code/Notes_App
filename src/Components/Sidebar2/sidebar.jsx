@@ -20,7 +20,6 @@ import HomeIcon from "@mui/icons-material/Home";
 import PriorityHighIcon from "@mui/icons-material/PriorityHigh";
 import UndoIcon from "@mui/icons-material/Undo";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
-
 import { useNavigate } from "react-router-dom";
 
 const drawerWidth = 240;
@@ -73,9 +72,22 @@ function ResponsiveDrawer(props) {
       <Divider />
       <List>
         {["Home", "Important", "Archieved", "Deleted"].map((text, index) => (
-          <ListItem key={text} disablePadding className="hover:bg-blue-600">
-            <ListItemButton onClick={() => handleNavigation(text)}>
-              <ListItemIcon>
+          <ListItem key={text}>
+            <ListItemButton
+              onClick={() => handleNavigation(text)}
+              sx={{
+                borderTopRightRadius: "24px",
+                borderBottomRightRadius: "24px",
+                "&:hover": {
+                  backgroundColor: "rgb(21,93,252)",
+                  color: "white",
+                },
+                "&:hover #listIcon": {
+                  color: "white",
+                },
+              }}
+            >
+              <ListItemIcon id="listIcon">
                 {index === 0 && <HomeIcon />}
                 {index === 1 && <PriorityHighIcon />}
                 {index === 2 && <UndoIcon />}

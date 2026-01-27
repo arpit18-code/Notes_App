@@ -5,7 +5,7 @@ const Home = () => {
   return (
     <>
       <Navbar />
-      <div className="flex">
+      <div className="flex justify-start sm:justify-between bg-gray-100 min-h-screen h-auto">
         <Sidebar />
         <NotesCard />
       </div>
