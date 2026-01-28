@@ -62,13 +62,13 @@ export const SingleNoteCard = ({ SingleNote }) => {
           className="cursor-pointer"
           title="Delete Note"
           onClick={() =>
-            SingleNote.important === !true
-              ? dispatchNotes({
-                  type: "DeleteNote",
+            SingleNote.important
+              ? dispatchImportantNotes({
+                  type: "DeleteImpNote",
                   payload: SingleNote.id,
                 })
-              : dispatchImportantNotes({
-                  type: "DeleteImpNote",
+              : dispatchNotes({
+                  type: "DeleteNote",
                   payload: SingleNote.id,
                 })
           }
