@@ -1,48 +1,19 @@
 import { createContext } from "react";
-import { useReducer } from "react";
-import { v4 as uuidv4 } from "uuid";
-
+import { useReducer, useEffect, useState } from "react";
+import { AllNotesReducer } from "../../reducers/AllNotesReducer/allNotesReducer";
+import { ImpNotesReducer } from "../../reducers/ImpNotesReducer/impNotesReducer";
 const AllNotes = createContext();
 
 const AllNotesProvider = ({ children }) => {
-  let reducer = (state, action) => {
-    switch (action.type) {
-      case "AddNote":
-        return [
-          ...state,
-          {
-            id: uuidv4(),
-            title: action.payload.NoteTitle,
-            note: action.payload.NoteText,
-            important: false,
-            pinned: false,
-          },
-        ];
-      case "DeleteNote":
-        let newState = state.filter(
-          (singleNote) => singleNote.id != action.payload,
-        );
-        return newState;
-      case "PinNote":
-        let pinnedNote = state.filter(
-          (singleNote) => singleNote.id === action.payload,
-        );
-        pinnedNote[0].pinned = true;
-        let unpinnedNotes = state.filter(
-          (singleNote) => singleNote.id !== action.payload,
-        );
-        return [pinnedNote[0], ...unpinnedNotes];
-      case "UnpinNote":
-        return state.map((singleNote) =>
-          singleNote.id === action.payload
-            ? { ...singleNote, pinned: false }
-            : singleNote,
-        );
-    }
-  };
-  let [Notes, dispatchNotes] = useReducer(reducer, []);
+  let [Notes, dispatchNotes] = useReducer(AllNotesReducer, []);
+  let [importantNotes, dispatchImportantNotes] = useReducer(
+    ImpNotesReducer,
+    [],
+  );
   return (
-    <AllNotes.Provider value={{ Notes, dispatchNotes }}>
+    <AllNotes.Provider
+      value={{ Notes, dispatchNotes, importantNotes, dispatchImportantNotes }}
+    >
       {children}
     </AllNotes.Provider>
   );

@@ -2,18 +2,27 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { MdLabelImportantOutline } from "react-icons/md";
 import { useState, useContext } from "react";
 import { AllNotes } from "../../Context/AllNotes/allNotesContext";
-
+import { MdLabelImportant } from "react-icons/md";
 export const AddNote = () => {
   let [title, setTitle] = useState("");
   let [note, setNote] = useState("");
-  let { dispatchNotes } = useContext(AllNotes);
+  let [Important, setImportant] = useState(false);
+  let { dispatchNotes, dispatchImportantNotes } = useContext(AllNotes);
   let handleAddNote = () => {
-    dispatchNotes({
-      type: "AddNote",
-      payload: { NoteTitle: title, NoteText: note },
-    });
+    if (Important) {
+      dispatchImportantNotes({
+        type: "AddImpNote",
+        payload: { NoteTitle: title, NoteText: note },
+      });
+    } else {
+      dispatchNotes({
+        type: "AddNote",
+        payload: { NoteTitle: title, NoteText: note },
+      });
+    }
     setTitle("");
     setNote("");
+    setImportant(false);
   };
   return (
     <div className="p-4 min-w-40 w-auto max-w-80 rounded-2xl ml-auto shadow-lg bg-yellow-200 min-h-30 h-auto">
@@ -25,10 +34,19 @@ export const AddNote = () => {
           onChange={(e) => setTitle(e.target.value)}
           value={title}
         />
-        <MdLabelImportantOutline
-          className="h-8 w-8 cursor-pointer"
-          title="Important ?"
-        />
+        {Important ? (
+          <MdLabelImportant
+            className="h-8 w-8 cursor-pointer"
+            title="Remove important"
+            onClick={() => setImportant((Important) => !Important)}
+          />
+        ) : (
+          <MdLabelImportantOutline
+            className="h-8 w-8 cursor-pointer"
+            title="Set important"
+            onClick={() => setImportant((Important) => !Important)}
+          />
+        )}
       </div>
       <textarea
         type="text"

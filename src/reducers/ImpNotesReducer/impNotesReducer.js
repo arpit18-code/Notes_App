@@ -13,6 +13,8 @@ export const ImpNotesReducer = (state, action) => {
           time: Date.now(),
         },
       ];
+    case "DeleteImpNote":
+      return state.filter((singleNote) => singleNote.id != action.payload);
     case "PinImpNote":
       let PinnedNote = state.filter((note) => note.id === action.payload);
       PinnedNote[0].pinned = true;
