@@ -55,7 +55,7 @@ export const SingleNoteCard = ({ SingleNote }) => {
         )}
       </div>
       <hr />
-      <p className="text-sm">{SingleNote.note}</p>
+      <p className="text-sm whitespace-pre-wrap">{SingleNote.note}</p>
       <div className="flex justify-end gap-4 text-lg">
         <IoMdArchive className="cursor-pointer" title="Archive Note" />
         <MdDelete
