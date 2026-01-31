@@ -10,7 +10,7 @@ const Important = () => {
       <Navbar />
       <div className="flex justify-start sm:justify-between bg-gray-100 min-h-screen h-auto font-poppins">
         <Sidebar />
-        <main className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 p-4 w-full">
+        <main className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 auto-rows-max gap-2 p-4 w-full">
           {importantNotes.length > 0 &&
             importantNotes?.map((singleNote) => {
               return (
