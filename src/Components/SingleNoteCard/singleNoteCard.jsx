@@ -21,7 +21,7 @@ export const SingleNoteCard = ({ SingleNote }) => {
   };
   return (
     <div
-      className="p-2 flex flex-col gap-2 h-fit rounded-lg bg-yellow-200 border-l-6 border-b-6 border-gray-300 shadow-md shadow-gray-300"
+      className="p-2 flex flex-col gap-2 h-fit rounded-lg bg-linear-to-b from-blue-400 to-blue-100 border-l-6 border-b-6 border-gray-300 shadow-md shadow-gray-300 text-[#001f4d] sm:hover:scale-101 cursor-pointer"
       key={SingleNote.id}
     >
       <div className="flex justify-between items-center text-lg">

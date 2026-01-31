@@ -25,7 +25,7 @@ export const AddNote = () => {
     setImportant(false);
   };
   return (
-    <div className="p-4 min-w-40 w-auto max-w-80 rounded-2xl ml-auto shadow-lg bg-yellow-200 min-h-30 h-auto">
+    <div className="p-4 min-w-40 w-auto max-w-80 rounded-2xl ml-auto shadow-lg bg-yellow-200 min-h-30 h-auto bg-linear-to-b from-blue-400 to-blue-100 border-l-6 border-gray-300">
       <div className="flex justify-between items-center">
         <input
           type="text"
