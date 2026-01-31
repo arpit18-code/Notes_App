@@ -33,5 +33,9 @@ export const ImpNotesReducer = (state, action) => {
       let pinnedNotes = newstate.filter((note) => note.pinned === true);
       let notPinnedNotes = newstate.filter((note) => note.pinned === false);
       return [...pinnedNotes, ...notPinnedNotes];
+    case "RestoreNote":
+      action.payload.deleted = false;
+      action.payload.pinned = false;
+      return [...state, action.payload].sort((a, b) => a.time - b.time);
   }
 };
