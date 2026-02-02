@@ -38,5 +38,7 @@ export const DeletedNotesReducer = (state, action) => {
       let pinnedNotes = newstate.filter((note) => note.pinned === true);
       let notPinnedNotes = newstate.filter((note) => note.pinned === false);
       return [...pinnedNotes, ...notPinnedNotes];
+    case "fetchNotes":
+      return Array.isArray(action.payload) ? action.payload : [];
   }
 };

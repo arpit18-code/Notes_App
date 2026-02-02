@@ -1,10 +1,13 @@
 import Sidebar from "../Components/Sidebar2/sidebar";
 import Navbar from "../Components/Navbar/navbar";
 import { SingleNoteCard } from "../Components/SingleNoteCard/singleNoteCard";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AllNotes } from "../Context/AllNotes/allNotesContext";
 const Bin = () => {
-  let { deletedNotes } = useContext(AllNotes);
+  let { deletedNotes, setCurrentPage } = useContext(AllNotes);
+  useEffect(() => {
+    setCurrentPage("Deleted");
+  }, []);
   return (
     <>
       <Navbar />

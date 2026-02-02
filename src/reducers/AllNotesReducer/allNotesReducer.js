@@ -49,5 +49,7 @@ export const AllNotesReducer = (state, action) => {
       action.payload.archived = false;
       action.payload.pinned = false;
       return [...state, action.payload].sort((a, b) => a.time - b.time);
+    case "fetchNotes":
+      return Array.isArray(action.payload) ? action.payload : [];
   }
 };

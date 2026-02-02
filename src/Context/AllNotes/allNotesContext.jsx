@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { useReducer, useState } from "react";
+import { useReducer, useState, useEffect } from "react";
 import { AllNotesReducer } from "../../reducers/AllNotesReducer/allNotesReducer";
 import { ImpNotesReducer } from "../../reducers/ImpNotesReducer/impNotesReducer";
 import { DeletedNotesReducer } from "../../reducers/DeletedNotesReducer/deletedNotesReducer";
@@ -20,7 +20,32 @@ const AllNotesProvider = ({ children }) => {
     ArchiveNotesReducer,
     [],
   );
-  let [currentPage, setCurrentPage] = useState("Home");
+  let [currentPage, setCurrentPage] = useState("");
+
+  useEffect(() => {
+    const savedNotes = localStorage.getItem("notes");
+
+    if (savedNotes) {
+      const parsedNotes = JSON.parse(savedNotes);
+
+      dispatchNotes({
+        type: "fetchNotes",
+        payload: parsedNotes.Notes || [],
+      });
+      dispatchImportantNotes({
+        type: "fetchNotes",
+        payload: parsedNotes.importantNotes || [],
+      });
+      dispatchArchiveNotes({
+        type: "fetchNotes",
+        payload: parsedNotes.archiveNotes || [],
+      });
+      dispatchDeletedNotes({
+        type: "fetchNotes",
+        payload: parsedNotes.deletedNotes || [],
+      });
+    }
+  }, []);
   return (
     <AllNotes.Provider
       value={{
