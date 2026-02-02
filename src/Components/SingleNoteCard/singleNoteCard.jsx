@@ -80,7 +80,6 @@ export const SingleNoteCard = ({ SingleNote }) => {
 
   let handleDeleteNotes = (SingleNote) => {
     if (SingleNote.important && SingleNote.archived === false) {
-      console.log("1st if statement implemented of deleted");
       dispatchImportantNotes({
         type: "DeleteImpNote",
         payload: SingleNote.id,
@@ -93,7 +92,6 @@ export const SingleNoteCard = ({ SingleNote }) => {
       (SingleNote.important && SingleNote.archived === true) ||
       (!SingleNote.important && SingleNote.archived === true)
     ) {
-      console.log("2nd if statement implemented of deleted");
       dispatchArchiveNotes({
         type: "UnArchiveNote",
         payload: SingleNote.id,
@@ -103,7 +101,6 @@ export const SingleNoteCard = ({ SingleNote }) => {
         payload: SingleNote,
       });
     } else {
-      console.log("3rd if statement implemented of deleted");
       dispatchNotes({
         type: "DeleteNote",
         payload: SingleNote.id,
@@ -117,7 +114,6 @@ export const SingleNoteCard = ({ SingleNote }) => {
 
   let handleRestoreNotes = (SingleNote) => {
     if (SingleNote.important && SingleNote.archived === false) {
-      console.log("1st statement of if statement implemented in restore notes");
       dispatchImportantNotes({
         type: "RestoreNote",
         payload: SingleNote,
@@ -130,7 +126,6 @@ export const SingleNoteCard = ({ SingleNote }) => {
       (SingleNote.important && SingleNote.archived === true) ||
       (!SingleNote.important && SingleNote.archived === true)
     ) {
-      console.log("2nd if statement implemented in restore notes");
       dispatchArchiveNotes({
         type: "RestoreNote",
         payload: SingleNote,
@@ -140,7 +135,6 @@ export const SingleNoteCard = ({ SingleNote }) => {
         payload: SingleNote.id,
       });
     } else {
-      console.log("3rd statement of if statement implemented in restore notes");
       dispatchNotes({
         type: "RestoreNote",
         payload: SingleNote,
