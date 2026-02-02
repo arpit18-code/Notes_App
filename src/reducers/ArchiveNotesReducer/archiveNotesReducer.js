@@ -1,6 +1,6 @@
-export const DeletedNotesReducer = (state, action) => {
+export const ArchiveNotesReducer = (state, action) => {
   switch (action.type) {
-    case "AddDeletedNote":
+    case "ArchiveNote":
       return [
         ...state,
         {
@@ -9,23 +9,23 @@ export const DeletedNotesReducer = (state, action) => {
           note: action.payload.note,
           important: action.payload.important,
           time: action.payload.time,
-          deleted: true,
           pinned: false,
-          archived: action.payload.archived,
+          archived: true,
+          deleted: false,
         },
       ];
+    case "UnArchiveNote":
+      return state.filter((note) => note.id !== action.payload);
     case "RestoreNote":
-      return [...state].filter((note) => note.id != action.payload);
-    case "PinNote":
-      let pinnedNote = state.filter(
-        (singleNote) => singleNote.id === action.payload,
-      );
-      pinnedNote[0].pinned = true;
-      let unpinnedNotes = state.filter(
-        (singleNote) => singleNote.id !== action.payload,
-      );
-      return [pinnedNote[0], ...unpinnedNotes];
-    case "UnPinNote":
+      action.payload.deleted = false;
+      action.payload.pinned = false;
+      return [...state, action.payload].sort((a, b) => a.time - b.time);
+    case "PinArchiveNote":
+      let PinnedNote = state.filter((note) => note.id === action.payload);
+      PinnedNote[0].pinned = true;
+      let unPinnedNote = state.filter((note) => note.id !== action.payload);
+      return [PinnedNote[0], ...unPinnedNote];
+    case "UnPinArchiveNote":
       let newstate = state
         .map((note) => {
           if (note.id === action.payload) {

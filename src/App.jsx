@@ -9,9 +9,9 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/important" element={<Important />} />
-        <Route path="/bin" element={<Bin />} />
-        <Route path="/archieve" element={<Archieve />} />
+        <Route path="/Important" element={<Important />} />
+        <Route path="/Deleted" element={<Bin />} />
+        <Route path="/Archived" element={<Archieve />} />
       </Routes>
     </>
   );

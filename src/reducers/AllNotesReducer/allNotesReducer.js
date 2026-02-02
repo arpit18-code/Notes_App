@@ -10,6 +10,8 @@ export const AllNotesReducer = (state, action) => {
           note: action.payload.NoteText,
           pinned: false,
           time: Date.now(),
+          archived: false,
+          deleted: false,
         },
       ];
     case "DeleteNote":
@@ -41,6 +43,10 @@ export const AllNotesReducer = (state, action) => {
       return [...pinnedNotes, ...notPinnedNotes];
     case "RestoreNote":
       action.payload.deleted = false;
+      action.payload.pinned = false;
+      return [...state, action.payload].sort((a, b) => a.time - b.time);
+    case "UnArchiveNote":
+      action.payload.archived = false;
       action.payload.pinned = false;
       return [...state, action.payload].sort((a, b) => a.time - b.time);
   }

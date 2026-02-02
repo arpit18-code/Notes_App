@@ -1,5 +1,7 @@
 import * as React from "react";
 import PropTypes from "prop-types";
+import { useContext } from "react";
+import { AllNotes } from "../../Context/AllNotes/allNotesContext";
 import {
   Divider,
   Drawer,
@@ -45,19 +47,24 @@ function ResponsiveDrawer(props) {
     }
   };
 
+  let { currentPage, setCurrentPage } = useContext(AllNotes);
   const handleNavigation = (text) => {
     switch (text) {
       case "Home":
         navigate("/");
+        setCurrentPage("Home");
         break;
       case "Important":
-        navigate("/important");
+        navigate("/Important");
+        setCurrentPage("Important");
         break;
-      case "Archieved":
-        navigate("/archieve");
+      case "Archived":
+        navigate("/Archived");
+        setCurrentPage("Archived");
         break;
       case "Deleted":
-        navigate("/bin");
+        navigate("/Deleted");
+        setCurrentPage("Deleted");
         break;
       default:
         break;
@@ -71,15 +78,24 @@ function ResponsiveDrawer(props) {
       <Toolbar />
       <Divider />
       <List>
-        {["Home", "Important", "Archieved", "Deleted"].map((text, index) => (
+        {["Home", "Important", "Archived", "Deleted"].map((text, index) => (
           <ListItem key={text}>
             <ListItemButton
               onClick={() => handleNavigation(text)}
               sx={{
+                backgroundColor:
+                  currentPage === text ? "rgb(21,93,252)" : "transparent",
+                color: currentPage === text ? "white" : "inherit",
+                "& #listIcon": {
+                  color: currentPage === text ? "white" : "inherit",
+                },
                 borderTopRightRadius: "24px",
                 borderBottomRightRadius: "24px",
                 "&:hover": {
-                  backgroundColor: "rgb(21,93,252)",
+                  backgroundColor:
+                    currentPage === text
+                      ? "rgb(21,93,252)"
+                      : "rgb(60, 120, 255)",
                   color: "white",
                 },
                 "&:hover #listIcon": {
